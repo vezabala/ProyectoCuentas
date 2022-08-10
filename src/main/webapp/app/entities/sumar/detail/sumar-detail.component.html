@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sumar">
+      <h2 data-cy="sumarDetailsHeading"><span>Sumar</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ sumar.id }}</span>
+        </dd>
+        <dt><span>Cantidad Sumar</span></dt>
+        <dd>
+          <span>{{ sumar.cantidadSumar }}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+          <span>{{ sumar.fecha | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Cantidad</span></dt>
+        <dd>
+          <div *ngIf="sumar.cantidad">
+            <a [routerLink]="['/cantidad', sumar.cantidad.id, 'view']">{{ sumar.cantidad?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sumar', sumar.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

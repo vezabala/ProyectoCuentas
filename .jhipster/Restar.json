@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20220810021630",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "restar",
+  "fields": [
+    {
+      "fieldName": "cantidadRestar",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Restar",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cantidad",
+      "otherEntityRelationshipName": "restas",
+      "relationshipName": "cantidad",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}
