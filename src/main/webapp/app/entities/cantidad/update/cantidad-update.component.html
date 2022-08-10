@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-cantidad-heading" data-cy="CantidadCreateUpdateHeading">Crear o editar Cantidad</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_nombreCuenta">Nombre Cuenta</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreCuenta"
+            id="field_nombreCuenta"
+            data-cy="nombreCuenta"
+            formControlName="nombreCuenta"
+          />
+          <div
+            *ngIf="editForm.get('nombreCuenta')!.invalid && (editForm.get('nombreCuenta')!.dirty || editForm.get('nombreCuenta')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('nombreCuenta')?.errors?.required"> Este campo es obligatorio. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cantidadActual">Cantidad Actual</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cantidadActual"
+            id="field_cantidadActual"
+            data-cy="cantidadActual"
+            formControlName="cantidadActual"
+          />
+          <div
+            *ngIf="
+              editForm.get('cantidadActual')!.invalid && (editForm.get('cantidadActual')!.dirty || editForm.get('cantidadActual')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('cantidadActual')?.errors?.required">
+              Este campo es obligatorio.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('cantidadActual')?.errors?.number">
+              Este campo debe ser un número.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

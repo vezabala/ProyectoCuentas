@@ -1,0 +1,23 @@
+entity Cantidad{
+	nombreCuenta String required,
+	cantidadActual Integer required
+}
+entity Sumar{
+	cantidadSumar Integer required,
+	fecha LocalDate required
+}
+entity Restar{
+	cantidadRestar Integer required,
+	fecha LocalDate required
+}
+
+relationship OneToMany{
+	Cantidad{sumas} to Sumar {cantidad required},
+    Cantidad{restas} to Restar {cantidad required}
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate  * with pagination
+//search * with elasticsearch
+

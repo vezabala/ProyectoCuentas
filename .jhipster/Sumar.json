@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20220810021629",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "sumar",
+  "fields": [
+    {
+      "fieldName": "cantidadSumar",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fecha",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Sumar",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "cantidad",
+      "otherEntityRelationshipName": "sumas",
+      "relationshipName": "cantidad",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

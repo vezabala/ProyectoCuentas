@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220810021628",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "cantidad",
+  "fields": [
+    {
+      "fieldName": "nombreCuenta",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "cantidadActual",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cantidad",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "sumar",
+      "otherEntityRelationshipName": "cantidad",
+      "relationshipName": "sumas",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "restar",
+      "otherEntityRelationshipName": "cantidad",
+      "relationshipName": "restas",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

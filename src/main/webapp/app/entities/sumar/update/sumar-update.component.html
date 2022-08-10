@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sumar-heading" data-cy="SumarCreateUpdateHeading">Crear o editar Sumar</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cantidadSumar">Cantidad Sumar</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cantidadSumar"
+            id="field_cantidadSumar"
+            data-cy="cantidadSumar"
+            formControlName="cantidadSumar"
+          />
+          <div
+            *ngIf="
+              editForm.get('cantidadSumar')!.invalid && (editForm.get('cantidadSumar')!.dirty || editForm.get('cantidadSumar')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('cantidadSumar')?.errors?.required">
+              Este campo es obligatorio.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('cantidadSumar')?.errors?.number">
+              Este campo debe ser un número.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fecha">Fecha</label>
+          <div class="input-group">
+            <input
+              id="field_fecha"
+              data-cy="fecha"
+              type="text"
+              class="form-control"
+              name="fecha"
+              ngbDatepicker
+              #fechaDp="ngbDatepicker"
+              formControlName="fecha"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fechaDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('fecha')!.invalid && (editForm.get('fecha')!.dirty || editForm.get('fecha')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('fecha')?.errors?.required"> Este campo es obligatorio. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cantidad">Cantidad</label>
+          <select
+            class="form-control"
+            id="field_cantidad"
+            data-cy="cantidad"
+            name="cantidad"
+            formControlName="cantidad"
+            [compareWith]="compareCantidad"
+          >
+            <option *ngIf="editForm.get(['cantidad'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="cantidadOption" *ngFor="let cantidadOption of cantidadsSharedCollection">{{ cantidadOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['cantidad'])!.invalid && (editForm.get(['cantidad'])!.dirty || editForm.get(['cantidad'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['cantidad'])?.errors?.required"> Este campo es obligatorio. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
